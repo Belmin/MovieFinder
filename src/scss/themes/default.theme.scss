@@ -1,0 +1,55 @@
+@mixin default-theme($theme) {
+  $primary-palette: map-get($theme, primary);
+  @include primary-theme($primary-palette);
+
+  $accent-palette: map-get($theme, accent);
+  @include accent-theme($accent-palette);
+
+  $warn-palette: map-get($theme, warn);
+  @include warn-theme($warn-palette);
+}
+
+@mixin primary-theme($palette) {
+  $color: mat-color($palette);
+  .primary {
+    color: $color;
+  }
+
+  .primary-background {
+    background: $color;
+  }
+
+  .primary-background-color {
+    background-color: $color;
+  }
+}
+
+@mixin accent-theme($palette) {
+  $color: mat-color($palette);
+  .accent {
+    color: $color;
+  }
+
+  .accent-background {
+    background: $color;
+  }
+
+  .accent-background-color {
+    background-color: $color;
+  }
+}
+
+@mixin warn-theme($palette) {
+  $color: mat-color($palette);
+  .warn {
+    color: $color;
+  }
+
+  .warn-background {
+    background: $color;
+  }
+
+  .warn-background-color {
+    background-color: $color;
+  }
+}

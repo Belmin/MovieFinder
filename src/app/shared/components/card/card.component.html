@@ -1,0 +1,11 @@
+<div class="card-container">
+  <img *ngIf="imgUrl" class="poster" [src]="imgUrl" />
+  <div class="rating-box primary-background" *ngIf="rating">
+    <span class="text">
+      {{ rating }}
+    </span>
+  </div>
+  <div class="card-info">
+    <ng-content></ng-content>
+  </div>
+</div>

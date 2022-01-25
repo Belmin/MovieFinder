@@ -1,0 +1,21 @@
+@import "~@angular/material/theming";
+@import "../palettes/default-app.palette.scss";
+
+$app-primary-palette: mat-palette($blue);
+$app-accent-palette: mat-palette($dark-blue);
+$app-warn-palette: mat-palette($mat-red);
+
+$primary: mat-color($app-primary-palette);
+$accent: mat-color($app-accent-palette);
+$warn: mat-color($app-warn-palette);
+
+$white: #fff;
+$logo-url: "/assets/svg/logo.svg";
+$default-shadow: 0px 0px 14px 2px #d6dce5;
+$light-gray: #d6dce538;
+$tmdb-light-gray: #71839b;
+$tmdb-ultra-light-gray: #e4e9eb;
+$mat-form-field-label-color: #a1aec0;
+$tmdb-light-sky-gray: #c9d7df;
+$tmdb-ultry-light-blue: #f6f9fa;
+$tmdb-gray: #8797ab;

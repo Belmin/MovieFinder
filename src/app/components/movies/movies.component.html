@@ -1,0 +1,10 @@
+<div class="container">
+  <app-card
+    *ngFor="let movie of movies$ | async"
+    [posterPath]="movie.poster_path"
+    [rating]="movie.vote_average"
+  >
+    <p class="title accent">{{ movie.title }}</p>
+    <p class="accent">{{ movie.release_date | date }}</p>
+  </app-card>
+</div>

@@ -1,0 +1,15 @@
+@import "variables";
+
+.container {
+  display: flex;
+  width: 100%;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.title {
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+}

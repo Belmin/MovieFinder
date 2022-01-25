@@ -1,0 +1,26 @@
+@import "variables";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 0 4em;
+  height: 100%;
+  row-gap: 30px;
+}
+
+.logo {
+  background-image: url($logo-url);
+  background-position: center;
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 157px;
+  width: 157px;
+  margin: auto;
+}
+
+@media screen and (max-width: 425px) {
+  .container {
+    padding: 0 2em;
+    row-gap: 20px;
+  }
+}

@@ -1,0 +1,18 @@
+@import "~@angular/material/theming";
+
+@import "../common/variables";
+@import "../common/typography";
+@import "../themes/default.theme.scss";
+
+@include mat-base-typography($custom-typography);
+
+@include mat-core($custom-typography);
+
+$default-app-theme: mat-light-theme(
+  $app-primary-palette,
+  $app-accent-palette,
+  $app-warn-palette
+);
+
+@include angular-material-theme($default-app-theme);
+@include default-theme($default-app-theme);

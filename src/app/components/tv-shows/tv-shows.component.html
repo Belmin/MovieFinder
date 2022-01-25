@@ -1,0 +1,10 @@
+<div class="container">
+  <app-card
+    *ngFor="let show of tvShows$ | async"
+    [posterPath]="show.poster_path"
+    [rating]="show.vote_average"
+  >
+    <p class="title accent">{{ show.name }}</p>
+    <p class="accent">{{ show.first_air_date | date }}</p>
+  </app-card>
+</div>

@@ -1,0 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500&display=swap");
+@import "~@angular/material/theming";
+
+$custom-typography: mat-typography-config(
+  $font-family: "IBM Plex Sans, sans-serif",
+  $headline: mat-typography-level(24px, 25px, 500),
+  $title: mat-typography-level(18px, 18px, 500),
+  $subheading-2: mat-typography-level(18px, 18px, 500),
+  $subheading-1: mat-typography-level(17px, 18px, 300),
+  $body-1: mat-typography-level(14px, 14px, 300),
+  $body-2: mat-typography-level(14px, 14px, 500),
+  $caption: mat-typography-level(13px, 13px, 300),
+);

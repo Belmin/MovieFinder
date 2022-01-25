@@ -1,0 +1,32 @@
+<div class="container">
+  <nav mat-tab-nav-bar>
+    <a
+      class="navigation-tab"
+      [ngClass]="{ active: activeLink == item.link }"
+      mat-tab-link
+      *ngFor="let item of tabItems"
+      (click)="activeLink = item.link"
+      [active]="activeLink == item.link"
+      [routerLink]="item.link"
+      [disableRipple]="true"
+    >
+      {{ item.displayName }}
+    </a>
+  </nav>
+  <div class="search-container">
+    <mat-form-field
+      class="custom-form-field"
+      [appearance]="'outline'"
+      floatLabel="always"
+    >
+      <mat-icon matPrefix>search</mat-icon>
+      <input
+        #inputField
+        matInput
+        [placeholder]="'Search'"
+        type="search"
+        (keyup)="search($event)"
+      />
+    </mat-form-field>
+  </div>
+</div>
