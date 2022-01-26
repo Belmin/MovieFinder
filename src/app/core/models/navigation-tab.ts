@@ -1,4 +1,4 @@
-export interface TabItem {
+export interface NavigationTab {
   link: string;
   displayName: string;
 }

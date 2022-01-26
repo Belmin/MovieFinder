@@ -1,19 +1,21 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { SearchBoxService } from '@components/search-box/search-box.service';
 import { TvShow } from '@core/models/tv-show';
-import { TmdbApiService } from '@core/services/tmdb-api.service';
-import { Observable, take } from 'rxjs';
+import { BaseComponent } from '@shared/components/base/base.component';
+import { Observable, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-tv-shows',
   templateUrl: './tv-shows.component.html',
   styleUrls: ['./tv-shows.component.scss'],
 })
-export class TvShowsComponent implements OnInit {
+export class TvShowsComponent extends BaseComponent {
   tvShows$: Observable<TvShow[]>;
 
-  constructor(private tmdbApiService: TmdbApiService) {
-    this.tvShows$ = this.tmdbApiService.getTopRatedTvShows();
+  constructor(private searchBoxService: SearchBoxService) {
+    super();
+    this.tvShows$ = this.searchBoxService.tvShows$!.pipe(
+      takeUntil(this.destroy$)
+    );
   }
-
-  ngOnInit(): void {}
 }

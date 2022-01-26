@@ -16,8 +16,10 @@ export class CardComponent implements OnInit {
   constructor(private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
-    this.imgUrl = this.sanitizer.bypassSecurityTrustUrl(
-      Endpoints.GET_POSTER_IMAGE.replace('{posterPath}', this.posterPath!)
-    );
+    if (this.posterPath) {
+      this.imgUrl = this.sanitizer.bypassSecurityTrustUrl(
+        Endpoints.GET_POSTER_IMAGE.replace('{posterPath}', this.posterPath!)
+      );
+    }
   }
 }

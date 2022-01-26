@@ -4,7 +4,7 @@
     [posterPath]="show.poster_path"
     [rating]="show.vote_average"
   >
-    <p class="title accent">{{ show.name }}</p>
+    <p class="title accent">{{ show.name | textWrap: 30 }}</p>
     <p class="accent">{{ show.first_air_date | date }}</p>
   </app-card>
 </div>

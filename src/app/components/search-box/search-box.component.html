@@ -1,19 +1,18 @@
 <div class="container">
   <nav mat-tab-nav-bar>
     <a
-      class="navigation-tab"
-      [ngClass]="{ active: activeLink == item.link }"
+      *ngFor="let tab of navigationTabs"
       mat-tab-link
-      *ngFor="let item of tabItems"
-      (click)="activeLink = item.link"
-      [active]="activeLink == item.link"
-      [routerLink]="item.link"
-      [disableRipple]="true"
+      class="navigation-tab"
+      [ngClass]="{ active: selectedTab == tab.link }"
+      [active]="selectedTab == tab.link"
+      [routerLink]="tab.link"
+      (click)="selectTab(tab.link)"
     >
-      {{ item.displayName }}
+      {{ tab.displayName }}
     </a>
   </nav>
-  <div class="search-container">
+  <form class="search-container" [formGroup]="form">
     <mat-form-field
       class="custom-form-field"
       [appearance]="'outline'"
@@ -21,12 +20,11 @@
     >
       <mat-icon matPrefix>search</mat-icon>
       <input
-        #inputField
         matInput
+        formControlName="searchBox"
         [placeholder]="'Search'"
         type="search"
-        (keyup)="search($event)"
       />
     </mat-form-field>
-  </div>
+  </form>
 </div>

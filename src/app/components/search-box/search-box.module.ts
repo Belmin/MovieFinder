@@ -7,6 +7,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { RouterModule } from '@angular/router';
 import { MatTabsModule } from '@angular/material/tabs';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [SearchBoxComponent],
@@ -18,6 +19,8 @@ import { MatTabsModule } from '@angular/material/tabs';
     MatInputModule,
     RouterModule,
     MatTabsModule,
+    FormsModule,
+    ReactiveFormsModule,
   ],
   exports: [SearchBoxComponent],
 })

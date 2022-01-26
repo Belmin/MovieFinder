@@ -1,29 +1,58 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormControl, FormGroup } from '@angular/forms';
+import { NavigationEnd, Router } from '@angular/router';
+import NavigationTabs from '@core/constants/navigation-tabs';
 import Route from '@core/constants/route';
-import { TabItem } from '@core/models/tab-item';
+import { environment } from '@env/environment';
+import { BaseComponent } from '@shared/components/base/base.component';
+import { debounceTime, distinctUntilChanged, filter, takeUntil } from 'rxjs';
+import { SearchBoxService } from './search-box.service';
 
 @Component({
   selector: 'app-search-box',
   templateUrl: './search-box.component.html',
   styleUrls: ['./search-box.component.scss'],
 })
-export class SearchBoxComponent implements OnInit {
-  tabItems: TabItem[] = [
-    { link: Route.TV_SHOWS, displayName: 'TV Shows' },
-    { link: Route.MOVIES, displayName: 'Movies' },
-  ];
-  activeLink = Route.TV_SHOWS;
+export class SearchBoxComponent extends BaseComponent implements OnInit {
+  selectedTab = Route.TV_SHOWS;
+  navigationTabs = NavigationTabs;
+  form: FormGroup = new FormGroup({
+    searchBox: new FormControl(),
+  });
 
-  tabChangedEvent(event: any) {
-    console.log('AppComponent -> tabChangedEvent', event);
+  constructor(
+    private searchBoxService: SearchBoxService,
+    private router: Router
+  ) {
+    super();
+    this.router.events
+      .pipe(
+        filter((e): e is NavigationEnd => e instanceof NavigationEnd),
+        takeUntil(this.destroy$)
+      )
+      .subscribe((route) => {
+        this.selectedTab = route.urlAfterRedirects.replace('/', '');
+      });
   }
 
-  @Output() searched: EventEmitter<any> = new EventEmitter();
+  ngOnInit(): void {
+    this.form
+      .get('searchBox')
+      ?.valueChanges.pipe(
+        debounceTime(environment.searchDebounceTime),
+        distinctUntilChanged()
+      )
+      .subscribe((query) => {
+        if (query.length < environment.minCharactersForSearch) {
+          query = '';
+        }
 
-  ngOnInit(): void {}
+        this.searchBoxService.triggerSearchByQuery(query, this.selectedTab);
+      });
+  }
 
-  search(event: Event) {
-    const filterValue = (event.target as HTMLInputElement).value;
-    this.searched.emit(filterValue.trim().toLowerCase());
+  selectTab(link: string) {
+    this.selectedTab = link;
+    this.searchBoxService.handleSearchBySelectedTab(link);
   }
 }

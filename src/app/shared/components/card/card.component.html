@@ -1,5 +1,7 @@
 <div class="card-container">
-  <img *ngIf="imgUrl" class="poster" [src]="imgUrl" />
+  <ng-container *ngIf="imgUrl; else noImage">
+    <img class="poster" [src]="imgUrl" />
+  </ng-container>
   <div class="rating-box primary-background" *ngIf="rating">
     <span class="text">
       {{ rating }}
@@ -9,3 +11,7 @@
     <ng-content></ng-content>
   </div>
 </div>
+
+<ng-template #noImage>
+  <img class="poster" src="assets/png/no-image.png" />
+</ng-template>
