@@ -1,0 +1,24 @@
+<div class="container" *ngIf="details$ && (details$ | async) as details">
+  <app-header
+    [data]="{
+      release_date: details.first_air_date,
+      title: details.name,
+      vote_count: details.vote_count,
+      vote_average: details.vote_average
+    }"
+  ></app-header>
+  <app-cover [data]="details"></app-cover>
+  <app-genres [genres]="details.genres"></app-genres>
+  <section class="overview box">
+    <span class="title">Overview</span>
+    <span class="text">{{ details.overview }}</span>
+  </section>
+  <button
+    class="back-button"
+    mat-raised-button
+    color="primary"
+    (click)="back()"
+  >
+    Back
+  </button>
+</div>

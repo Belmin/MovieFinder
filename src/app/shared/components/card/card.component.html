@@ -1,10 +1,15 @@
-<div class="card-container">
+<div class="card-container" (click)="onClick()">
   <ng-container *ngIf="imgUrl; else noImage">
     <img class="poster" [src]="imgUrl" />
   </ng-container>
-  <div class="rating-box primary-background" *ngIf="rating">
+  <div
+    class="rating-box primary-background"
+    *ngIf="details?.vote_average && details?.vote_count"
+    matTooltipClass="trigger-tooltip"
+    [matTooltip]="'Votes: ' + details?.vote_count"
+  >
     <span class="text">
-      {{ rating }}
+      {{ details?.vote_average }}
     </span>
   </div>
   <div class="card-info">

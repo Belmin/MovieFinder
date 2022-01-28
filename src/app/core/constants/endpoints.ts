@@ -1,5 +1,5 @@
 const Endpoints = {
-  GET_POSTER_IMAGE: 'https://image.tmdb.org/t/p/w500/{posterPath}',
+  GET_IMAGE: 'https://image.tmdb.org/t/p/w500/{path}',
 };
 
 export default Endpoints;

@@ -2,10 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import TmdbLanguages from '@core/constants/tmdb-languages';
 import { Movie } from '@core/models/movie';
+import { MovieDetails } from '@core/models/movie-details';
 import { TmdbApiGetResponse } from '@core/models/tmdb-api-get-response';
 import { TvShow } from '@core/models/tv-show';
+import { TvShowDetails } from '@core/models/tv-show-details';
 import { environment } from '@env/environment';
-import { debounceTime, map, Observable, switchMap, take } from 'rxjs';
+import { map, Observable } from 'rxjs';
+// TODO: refactor code and run eslint
 
 @Injectable({
   providedIn: 'root',
@@ -14,7 +17,6 @@ export class TmdbApiService {
   constructor(private http: HttpClient) {}
 
   getTopRatedTvShows(): Observable<TvShow[]> {
-    // TODO: refactor code
     const query = {
       api_key: environment.tmdbApiKey,
       language: TmdbLanguages.ENGLISH,
@@ -31,7 +33,6 @@ export class TmdbApiService {
   }
 
   getTopRatedMovies(): Observable<Movie[]> {
-    // TODO: refactor code
     const query = {
       api_key: environment.tmdbApiKey,
       language: TmdbLanguages.ENGLISH,
@@ -59,5 +60,15 @@ export class TmdbApiService {
     return this.http
       .get<TmdbApiGetResponse<TvShow>>(url)
       .pipe(map((response) => response.results));
+  }
+
+  getMovieDetailsById(id: string): Observable<MovieDetails> {
+    const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${environment.tmdbApiKey}&append_to_response=videos`;
+    return this.http.get<MovieDetails>(url);
+  }
+
+  getTvShowDetailsById(id: string): Observable<TvShowDetails> {
+    const url = `https://api.themoviedb.org/3/tv/${id}?api_key=${environment.tmdbApiKey}&append_to_response=videos`;
+    return this.http.get<TvShowDetails>(url);
   }
 }

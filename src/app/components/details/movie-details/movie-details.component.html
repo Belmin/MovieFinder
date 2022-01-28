@@ -1,0 +1,17 @@
+<div class="container" *ngIf="details$ && (details$ | async) as details">
+  <app-header [data]="details"></app-header>
+  <app-cover [data]="details"></app-cover>
+  <app-genres [genres]="details.genres"></app-genres>
+  <section class="overview box" *ngIf="details.overview">
+    <span class="title">Overview</span>
+    <span class="text">{{ details.overview }}</span>
+  </section>
+  <button
+    class="back-button"
+    mat-raised-button
+    color="primary"
+    (click)="back()"
+  >
+    Back
+  </button>
+</div>

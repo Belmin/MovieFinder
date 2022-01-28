@@ -1,8 +1,8 @@
 <div class="container">
   <app-card
     *ngFor="let show of tvShows$ | async"
-    [posterPath]="show.poster_path"
-    [rating]="show.vote_average"
+    [details]="show"
+    (onClickEvent)="showDetails($event)"
   >
     <p class="title accent">{{ show.name | textWrap: 30 }}</p>
     <p class="accent">{{ show.first_air_date | date }}</p>

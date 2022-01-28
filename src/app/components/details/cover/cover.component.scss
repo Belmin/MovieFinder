@@ -1,0 +1,18 @@
+@import "variables";
+
+.media-box {
+  height: auto;
+  min-height: 451px;
+  max-height: 400px;
+  width: 100%;
+  max-width: 903px;
+  box-shadow: $default-shadow;
+  border-radius: 15px;
+  border: 4px solid $white;
+}
+
+@media screen and (max-width: 425px) {
+  .media-box {
+    min-height: 200px;
+  }
+}

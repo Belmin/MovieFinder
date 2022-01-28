@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
 import Endpoints from '@core/constants/endpoints';
+import { BaseDetails } from '@core/models/base-details';
 
 @Component({
   selector: 'app-card',
@@ -8,18 +9,22 @@ import Endpoints from '@core/constants/endpoints';
   styleUrls: ['./card.component.scss'],
 })
 export class CardComponent implements OnInit {
-  @Input() posterPath: string | undefined;
-  @Input() rating: number | undefined;
-
   imgUrl: SafeUrl | undefined;
+
+  @Input() details: BaseDetails | undefined;
+  @Output() onClickEvent = new EventEmitter<BaseDetails>();
 
   constructor(private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
-    if (this.posterPath) {
+    if (this.details?.poster_path) {
       this.imgUrl = this.sanitizer.bypassSecurityTrustUrl(
-        Endpoints.GET_POSTER_IMAGE.replace('{posterPath}', this.posterPath!)
+        Endpoints.GET_IMAGE.replace('{path}', this.details.poster_path!)
       );
     }
+  }
+
+  onClick() {
+    this.onClickEvent.emit(this.details);
   }
 }

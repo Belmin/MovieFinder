@@ -1,0 +1,15 @@
+<div class="container">
+  <div *ngIf="showTrailer && trailerUrl">
+    <iframe
+      class="media-box"
+      #video
+      width="100%"
+      height="auto"
+      [src]="trailerUrl"
+      frameborder="0"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+      allowfullscreen
+      (error)="onVideoLoadingError()"
+    ></iframe>
+  </div>
+</div>

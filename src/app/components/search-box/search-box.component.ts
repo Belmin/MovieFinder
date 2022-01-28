@@ -5,7 +5,13 @@ import NavigationTabs from '@core/constants/navigation-tabs';
 import Route from '@core/constants/route';
 import { environment } from '@env/environment';
 import { BaseComponent } from '@shared/components/base/base.component';
-import { debounceTime, distinctUntilChanged, filter, takeUntil } from 'rxjs';
+import {
+  debounceTime,
+  distinctUntilChanged,
+  filter,
+  Observable,
+  takeUntil,
+} from 'rxjs';
 import { SearchBoxService } from './search-box.service';
 
 @Component({
@@ -16,6 +22,7 @@ import { SearchBoxService } from './search-box.service';
 export class SearchBoxComponent extends BaseComponent implements OnInit {
   selectedTab = Route.TV_SHOWS;
   navigationTabs = NavigationTabs;
+  show$: Observable<boolean>;
   form: FormGroup = new FormGroup({
     searchBox: new FormControl(),
   });
@@ -25,6 +32,9 @@ export class SearchBoxComponent extends BaseComponent implements OnInit {
     private router: Router
   ) {
     super();
+    this.show$ = searchBoxService.showSearchBox$!.pipe(
+      takeUntil(this.destroy$)
+    );
     this.router.events
       .pipe(
         filter((e): e is NavigationEnd => e instanceof NavigationEnd),

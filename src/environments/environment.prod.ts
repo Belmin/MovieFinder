@@ -6,4 +6,5 @@ export const environment = {
   minCharactersForSearch: 3,
   searchDebounceTime: 1000,
   includeAdult: false,
+  autoPlayTrailer: false,
 };

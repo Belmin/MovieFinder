@@ -70,7 +70,7 @@ html {
   .mat-form-field-outline {
   height: 46px;
   background-color: $white;
-  border-radius: 7px;
+  border-radius: 15px;
   color: $tmdb-ultra-light-gray;
   font-weight: 400;
   transform: translateY(6%);
@@ -148,7 +148,7 @@ html {
   .mat-form-field-flex
   .mat-form-field-outline {
   background-color: $tmdb-ultry-light-blue;
-  border-radius: 7px;
+  border-radius: 15px;
 }
 
 .mat-form-field.custom-form-field.mat-form-field-appearance-outline.mat-form-field-disabled
@@ -211,4 +211,24 @@ html {
   .mat-form-field-label
   mat-icon {
   color: $warn;
+}
+
+.full-width-tooltip {
+  word-break: break-all;
+  line-height: 1.4;
+  font-size: 18px;
+}
+
+.mat-tooltip-panel mat-tooltip-component .mat-tooltip.trigger-tooltip {
+  background-color: $primary;
+  line-height: 1.4;
+  color: $white;
+  white-space: pre-line;
+  padding: 7px;
+  box-sizing: border-box;
+  border: 3px solid $white;
+  border-radius: 15px;
+  font-size: 16px;
+  font-weight: 500;
+  box-shadow: $default-shadow;
 }

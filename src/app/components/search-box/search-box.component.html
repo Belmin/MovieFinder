@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" *ngIf="show$ | async">
   <nav mat-tab-nav-bar>
     <a
       *ngFor="let tab of navigationTabs"
