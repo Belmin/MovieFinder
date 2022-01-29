@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { SearchBoxService } from '@components/search-box/search-box.service';
+import Route from '@core/constants/route';
 import { BaseDetails } from '@core/models/base-details';
 import { TvShow } from '@core/models/tv-show';
 import { BaseComponent } from '@shared/components/base/base.component';
@@ -13,7 +15,10 @@ import { Observable, takeUntil } from 'rxjs';
 export class TvShowsComponent extends BaseComponent {
   tvShows$: Observable<TvShow[]>;
 
-  constructor(private searchBoxService: SearchBoxService) {
+  constructor(
+    private searchBoxService: SearchBoxService,
+    private router: Router
+  ) {
     super();
     this.searchBoxService.showSearchBox();
     this.tvShows$ = this.searchBoxService.tvShows$!.pipe(
@@ -22,7 +27,6 @@ export class TvShowsComponent extends BaseComponent {
   }
 
   showDetails(details: BaseDetails) {
-    console.log('Base tv show details', details);
-    this.searchBoxService.showTvShowDetails(details);
+    this.router.navigate([Route.TV_SHOWS, details.id]);
   }
 }

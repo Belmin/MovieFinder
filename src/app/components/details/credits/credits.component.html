@@ -1,0 +1,16 @@
+<cdk-virtual-scroll-viewport
+  appendOnly
+  itemSize="50"
+  class="container"
+  [ngClass]="{
+    horizontal: orientation === 'horizontal' ? true : false
+  }"
+  [orientation]="orientation"
+>
+  <section class="profile-section">
+    <app-profile
+      *cdkVirtualFor="let member of data"
+      [data]="member"
+    ></app-profile>
+  </section>
+</cdk-virtual-scroll-viewport>

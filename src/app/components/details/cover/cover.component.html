@@ -1,15 +1,18 @@
-<div class="container">
-  <div *ngIf="showTrailer && trailerUrl">
-    <iframe
-      class="media-box"
-      #video
-      width="100%"
-      height="auto"
-      [src]="trailerUrl"
-      frameborder="0"
-      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-      allowfullscreen
-      (error)="onVideoLoadingError()"
-    ></iframe>
+<ng-container *ngIf="trailerUrl; else poster">
+  <iframe
+    class="media-box"
+    #video
+    width="100%"
+    height="auto"
+    [src]="trailerUrl"
+    frameborder="0"
+    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+    allowfullscreen
+  ></iframe>
+</ng-container>
+<ng-template #poster>
+  <div class="image-box">
+    <img *ngIf="posterUrl" class="poster" [src]="posterUrl" />
+    <img *ngIf="!posterUrl" class="poster" src="assets/png/no-image.png" />
   </div>
-</div>
+</ng-template>

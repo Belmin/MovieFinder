@@ -1,0 +1,29 @@
+@import "variables";
+
+.container {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
+  border: 3px solid $white;
+  box-shadow: $default-shadow;
+  border-radius: 15px;
+}
+
+.profile-section {
+  display: flex;
+  flex-direction: column;
+  row-gap: 20px;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.horizontal {
+  .profile-section {
+    flex-direction: row;
+    column-gap: 20px;
+    width: 100%;
+    padding: 10px;
+  }
+}

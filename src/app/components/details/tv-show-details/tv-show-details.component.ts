@@ -3,9 +3,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SearchBoxService } from '@components/search-box/search-box.service';
 import Route from '@core/constants/route';
+import { Credits } from '@core/models/credits';
 import { TvShowDetails } from '@core/models/tv-show-details';
 import { TmdbApiService } from '@core/services/tmdb-api.service';
-import { Observable, takeUntil } from 'rxjs';
+import { Observable } from 'rxjs';
 import { DetailsBase } from '../details-base';
 
 @Component({
@@ -15,6 +16,7 @@ import { DetailsBase } from '../details-base';
 })
 export class TvShowDetailsComponent extends DetailsBase implements OnInit {
   details$: Observable<TvShowDetails> | undefined;
+  credits$: Observable<Credits> | undefined;
 
   constructor(
     tmdbApiService: TmdbApiService,
@@ -30,6 +32,7 @@ export class TvShowDetailsComponent extends DetailsBase implements OnInit {
 
   fetchApi(): void {
     this.details$ = this.tmdbApiService.getTvShowDetailsById(this.id!);
+    this.credits$ = this.tmdbApiService.getTvShowCreditsById(this.id!);
   }
 
   back(): void {

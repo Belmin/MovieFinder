@@ -1,5 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 import { SearchBoxService } from '@components/search-box/search-box.service';
+import Route from '@core/constants/route';
 import { BaseDetails } from '@core/models/base-details';
 import { Movie } from '@core/models/movie';
 import { BaseComponent } from '@shared/components/base/base.component';
@@ -13,7 +15,10 @@ import { Observable, takeUntil } from 'rxjs';
 export class MoviesComponent extends BaseComponent {
   movies$: Observable<Movie[]>;
 
-  constructor(private searchBoxService: SearchBoxService) {
+  constructor(
+    public searchBoxService: SearchBoxService,
+    private router: Router
+  ) {
     super();
     this.searchBoxService.showSearchBox();
     this.movies$ = this.searchBoxService.movies$!.pipe(
@@ -22,6 +27,6 @@ export class MoviesComponent extends BaseComponent {
   }
 
   showDetails(details: BaseDetails) {
-    this.searchBoxService.showMovieDetails(details);
+    this.router.navigate([Route.MOVIES, details.id]);
   }
 }

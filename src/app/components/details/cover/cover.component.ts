@@ -1,5 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import {
+  DomSanitizer,
+  SafeResourceUrl,
+  SafeUrl,
+} from '@angular/platform-browser';
+import Endpoints from '@core/constants/endpoints';
 import { Video } from '@core/models/video';
 import { environment } from '@env/environment';
 import { CoverData } from './cover-data';
@@ -10,26 +15,24 @@ import { CoverData } from './cover-data';
   styleUrls: ['./cover.component.scss'],
 })
 export class CoverComponent implements OnInit {
-  showTrailer = false;
   @Input() data: CoverData | undefined;
 
   trailerUrl: SafeResourceUrl | undefined;
+  posterUrl: SafeUrl | undefined;
 
   constructor(private sanitizer: DomSanitizer) {}
 
   ngOnInit(): void {
     const trailer = this.findTrailerVideo();
     if (trailer) {
-      const youTubeLink = this.createEmbededYouTubeUrl(trailer.key);
-      console.log('youTubeLink', youTubeLink);
-      this.trailerUrl =
-        this.sanitizer.bypassSecurityTrustResourceUrl(youTubeLink);
-      this.showTrailer = true;
+      this.trailerUrl = this.sanitizer.bypassSecurityTrustResourceUrl(
+        this.createEmbededYouTubeUrl(trailer.key)
+      );
+    } else if (this.data?.poster_path) {
+      this.posterUrl = this.sanitizer.bypassSecurityTrustUrl(
+        Endpoints.GET_IMAGE.replace('{path}', this.data?.poster_path!)
+      );
     }
-  }
-
-  onVideoLoadingError(): void {
-    console.log('Error while loading video');
   }
 
   findTrailerVideo(): Video | undefined {

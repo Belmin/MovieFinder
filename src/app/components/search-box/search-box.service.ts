@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Router } from '@angular/router';
 import Route from '@core/constants/route';
-import { BaseDetails } from '@core/models/base-details';
 import { Movie } from '@core/models/movie';
 import { TvShow } from '@core/models/tv-show';
 import { TmdbApiService } from '@core/services/tmdb-api.service';
@@ -20,7 +18,7 @@ export class SearchBoxService {
   tvShows$: Observable<TvShow[]> | undefined;
   showSearchBox$: Observable<boolean> | undefined;
 
-  constructor(private tmdbApiService: TmdbApiService, private router: Router) {
+  constructor(private tmdbApiService: TmdbApiService) {
     this.showSearchBox$ = this._showSearchBox.asObservable();
     this.movies$ = this._movieQuery.pipe(
       switchMap((query) => {
@@ -52,18 +50,6 @@ export class SearchBoxService {
     selectedTab === Route.MOVIES
       ? this._movieQuery.next(this._searchTerm.value)
       : this._tvShowQuery.next(this._searchTerm.value);
-  }
-
-  showMovieDetails(details: BaseDetails) {
-    this.router.navigate([Route.MOVIES, details.id], {
-      state: details,
-    });
-  }
-
-  showTvShowDetails(details: BaseDetails) {
-    this.router.navigate([Route.TV_SHOWS, details.id], {
-      state: details,
-    });
   }
 
   hideSearchBox() {

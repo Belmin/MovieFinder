@@ -11,6 +11,11 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatDividerModule } from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatChipsModule } from '@angular/material/chips';
+import { CreditsComponent } from './credits/credits.component';
+import { SharedModule } from '@shared/shared.module';
+import { ProfileComponent } from './profile/profile.component';
+import { PipesModule } from '@shared/pipes/pipes.module';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [
@@ -19,6 +24,8 @@ import { MatChipsModule } from '@angular/material/chips';
     HeaderComponent,
     CoverComponent,
     GenresComponent,
+    CreditsComponent,
+    ProfileComponent,
   ],
   imports: [
     CommonModule,
@@ -28,6 +35,9 @@ import { MatChipsModule } from '@angular/material/chips';
     MatDividerModule,
     MatTooltipModule,
     MatChipsModule,
+    SharedModule,
+    PipesModule,
+    ScrollingModule,
   ],
   exports: [MovieDetailsComponent, TvShowDetailsComponent],
 })

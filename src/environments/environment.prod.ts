@@ -7,4 +7,5 @@ export const environment = {
   searchDebounceTime: 1000,
   includeAdult: false,
   autoPlayTrailer: false,
+  host: 'https://api.themoviedb.org/3',
 };

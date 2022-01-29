@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import TmdbLanguages from '@core/constants/tmdb-languages';
 import { Movie } from '@core/models/movie';
+import { Credits } from '@core/models/credits';
 import { MovieDetails } from '@core/models/movie-details';
 import { TmdbApiGetResponse } from '@core/models/tmdb-api-get-response';
 import { TvShow } from '@core/models/tv-show';
 import { TvShowDetails } from '@core/models/tv-show-details';
 import { environment } from '@env/environment';
 import { map, Observable } from 'rxjs';
-// TODO: refactor code and run eslint
+import Endpoints from '@core/constants/endpoints';
 
 @Injectable({
   providedIn: 'root',
@@ -16,15 +17,15 @@ import { map, Observable } from 'rxjs';
 export class TmdbApiService {
   constructor(private http: HttpClient) {}
 
-  getTopRatedTvShows(): Observable<TvShow[]> {
-    const query = {
+  getTopRatedTvShows(page = 1): Observable<TvShow[]> {
+    const params = {
       api_key: environment.tmdbApiKey,
       language: TmdbLanguages.ENGLISH,
-      page: 1,
+      page,
     };
-    const url = `https://api.themoviedb.org/3/tv/top_rated?api_key=${query.api_key}`;
+    const url = `${environment.host}/${Endpoints.TOP_RATED_TV_SHOWS}`;
     return this.http
-      .get<TmdbApiGetResponse<TvShow>>(url)
+      .get<TmdbApiGetResponse<TvShow>>(url, { params })
       .pipe(
         map((response) =>
           response.results.slice(0, environment.numberOfTopRatedShows)
@@ -32,15 +33,15 @@ export class TmdbApiService {
       );
   }
 
-  getTopRatedMovies(): Observable<Movie[]> {
-    const query = {
+  getTopRatedMovies(page = 1): Observable<Movie[]> {
+    const params = {
       api_key: environment.tmdbApiKey,
       language: TmdbLanguages.ENGLISH,
-      page: 1,
+      page,
     };
-    const url = `https://api.themoviedb.org/3/movie/top_rated?api_key=${query.api_key}`;
+    const url = `${environment.host}/${Endpoints.TOP_RATED_MOVIES}`;
     return this.http
-      .get<TmdbApiGetResponse<Movie>>(url)
+      .get<TmdbApiGetResponse<Movie>>(url, { params })
       .pipe(
         map((response) =>
           response.results.slice(0, environment.numberOfTopRatedMovies)
@@ -48,27 +49,69 @@ export class TmdbApiService {
       );
   }
 
-  searchMovies(searchTerm: string): Observable<Movie[]> {
-    const url = `https://api.themoviedb.org/3/search/movie?api_key=${environment.tmdbApiKey}&include_adult=${environment.includeAdult}&query=${searchTerm}`;
+  searchMovies(query: string, page = 1): Observable<Movie[]> {
+    const params = {
+      api_key: environment.tmdbApiKey,
+      include_adult: environment.includeAdult,
+      language: TmdbLanguages.ENGLISH,
+      query,
+      page,
+    };
+    const url = `${environment.host}/${Endpoints.SEARCH_MOVIE}`;
     return this.http
-      .get<TmdbApiGetResponse<Movie>>(url)
+      .get<TmdbApiGetResponse<Movie>>(url, { params })
       .pipe(map((response) => response.results));
   }
 
-  searchTvShows(searchTerm: string): Observable<TvShow[]> {
-    const url = `https://api.themoviedb.org/3/search/tv?api_key=${environment.tmdbApiKey}&include_adult=${environment.includeAdult}&query=${searchTerm}`;
+  searchTvShows(query: string, page = 1): Observable<TvShow[]> {
+    const params = {
+      api_key: environment.tmdbApiKey,
+      include_adult: environment.includeAdult,
+      language: TmdbLanguages.ENGLISH,
+      query,
+      page,
+    };
+    const url = `${environment.host}/${Endpoints.SEARCH_TV_SHOWS}`;
     return this.http
-      .get<TmdbApiGetResponse<TvShow>>(url)
+      .get<TmdbApiGetResponse<TvShow>>(url, { params })
       .pipe(map((response) => response.results));
   }
 
   getMovieDetailsById(id: string): Observable<MovieDetails> {
-    const url = `https://api.themoviedb.org/3/movie/${id}?api_key=${environment.tmdbApiKey}&append_to_response=videos`;
-    return this.http.get<MovieDetails>(url);
+    const params = {
+      api_key: environment.tmdbApiKey,
+      language: TmdbLanguages.ENGLISH,
+      append_to_response: 'videos',
+    };
+    const url = `${environment.host}/movie/${id}`;
+    return this.http.get<MovieDetails>(url, { params });
+  }
+
+  getMovieCreditsById(id: string): Observable<Credits> {
+    const params = {
+      api_key: environment.tmdbApiKey,
+      language: TmdbLanguages.ENGLISH,
+    };
+    const url = `${environment.host}/movie/${id}/credits`;
+    return this.http.get<Credits>(url, { params });
+  }
+
+  getTvShowCreditsById(id: string): Observable<Credits> {
+    const params = {
+      api_key: environment.tmdbApiKey,
+      language: TmdbLanguages.ENGLISH,
+    };
+    const url = `${environment.host}/tv/${id}/credits`;
+    return this.http.get<Credits>(url, { params });
   }
 
   getTvShowDetailsById(id: string): Observable<TvShowDetails> {
-    const url = `https://api.themoviedb.org/3/tv/${id}?api_key=${environment.tmdbApiKey}&append_to_response=videos`;
-    return this.http.get<TvShowDetails>(url);
+    const params = {
+      api_key: environment.tmdbApiKey,
+      language: TmdbLanguages.ENGLISH,
+      append_to_response: 'videos',
+    };
+    const url = `${environment.host}/tv/${id}`;
+    return this.http.get<TvShowDetails>(url, { params });
   }
 }

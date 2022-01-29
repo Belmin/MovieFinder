@@ -6,5 +6,6 @@ export const environment = {
   minCharactersForSearch: 3,
   searchDebounceTime: 500,
   includeAdult: false,
-  autoPlayTrailer: false
+  autoPlayTrailer: false,
+  host: 'https://api.themoviedb.org/3',
 };

@@ -3,9 +3,10 @@ import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 import { SearchBoxService } from '@components/search-box/search-box.service';
 import Route from '@core/constants/route';
+import { Credits } from '@core/models/credits';
 import { MovieDetails } from '@core/models/movie-details';
 import { TmdbApiService } from '@core/services/tmdb-api.service';
-import { Observable, takeUntil } from 'rxjs';
+import { Observable } from 'rxjs';
 import { DetailsBase } from '../details-base';
 
 @Component({
@@ -15,6 +16,7 @@ import { DetailsBase } from '../details-base';
 })
 export class MovieDetailsComponent extends DetailsBase implements OnInit {
   details$: Observable<MovieDetails> | undefined;
+  credits$: Observable<Credits> | undefined;
 
   constructor(
     tmdbApiService: TmdbApiService,
@@ -30,9 +32,7 @@ export class MovieDetailsComponent extends DetailsBase implements OnInit {
 
   fetchApi(): void {
     this.details$ = this.tmdbApiService.getMovieDetailsById(this.id!);
-    this.details$.pipe(takeUntil(this.destroy$)).subscribe((response) => {
-      console.log(response);
-    });
+    this.credits$ = this.tmdbApiService.getMovieCreditsById(this.id!);
   }
 
   back(): void {

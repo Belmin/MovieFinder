@@ -6,10 +6,8 @@ import { HeaderData } from './header-data';
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   @Input() data: HeaderData | undefined;
 
   constructor() {}
-
-  ngOnInit(): void {}
 }

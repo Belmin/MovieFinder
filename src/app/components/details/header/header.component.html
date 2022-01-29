@@ -1,7 +1,7 @@
 <div class="container">
   <div class="left">
     <span class="title">{{ data?.title }}</span>
-    <div fxLayout="row" fxLayoutGap="10px">
+    <div class="subtitle">
       <span *ngIf="data?.release_date" class="text" matTooltip="Release date">
         {{ data?.release_date | date }}</span
       >
@@ -19,12 +19,11 @@
       </ng-container>
     </div>
   </div>
-  <div class="right">
+  <div class="right" *ngIf="data?.vote_average && data?.vote_count">
     <div fxLayout="column" fxLayoutGap="5px">
       <span class="text">Rating</span>
       <div
         class="rating-box primary-background"
-        *ngIf="data?.vote_average && data?.vote_count"
         matTooltipClass="trigger-tooltip"
         [matTooltip]="'Votes: ' + data?.vote_count"
       >

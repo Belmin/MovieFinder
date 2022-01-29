@@ -1,24 +1,39 @@
-<div class="container" *ngIf="details$ && (details$ | async) as details">
-  <app-header
-    [data]="{
-      release_date: details.first_air_date,
-      title: details.name,
-      vote_count: details.vote_count,
-      vote_average: details.vote_average
-    }"
-  ></app-header>
-  <app-cover [data]="details"></app-cover>
-  <app-genres [genres]="details.genres"></app-genres>
-  <section class="overview box">
-    <span class="title">Overview</span>
-    <span class="text">{{ details.overview }}</span>
-  </section>
-  <button
-    class="back-button"
-    mat-raised-button
-    color="primary"
-    (click)="back()"
-  >
-    Back
-  </button>
+<div class="container">
+  <div class="content">
+    <div class="details" *ngIf="details$ && (details$ | async) as details">
+      <app-header
+        [data]="{
+          release_date: details.first_air_date,
+          title: details.name,
+          vote_count: details.vote_count,
+          vote_average: details.vote_average
+        }"
+      ></app-header>
+      <app-cover [data]="details"></app-cover>
+      <app-genres [genres]="details.genres"></app-genres>
+      <div class="overview box" *ngIf="details.overview">
+        <span class="title">Overview</span>
+        <span class="text">{{ details.overview }}</span>
+      </div>
+      <button
+        class="back-button"
+        mat-raised-button
+        color="primary"
+        (click)="back()"
+      >
+        Back
+      </button>
+    </div>
+    <ng-container *ngIf="credits$ && (credits$ | async) as credits">
+      <div class="credits" *ngIf="credits.cast.length > 0">
+        <span class="text">Cast</span>
+        <app-credits [data]="credits.cast"></app-credits>
+
+        <ng-container *ngIf="credits.crew.length > 0">
+          <span class="text">Crew</span>
+          <app-credits [data]="credits.crew"></app-credits>
+        </ng-container>
+      </div>
+    </ng-container>
+  </div>
 </div>

@@ -1,17 +1,30 @@
-<div class="container" *ngIf="details$ && (details$ | async) as details">
-  <app-header [data]="details"></app-header>
-  <app-cover [data]="details"></app-cover>
-  <app-genres [genres]="details.genres"></app-genres>
-  <section class="overview box" *ngIf="details.overview">
-    <span class="title">Overview</span>
-    <span class="text">{{ details.overview }}</span>
-  </section>
-  <button
-    class="back-button"
-    mat-raised-button
-    color="primary"
-    (click)="back()"
-  >
-    Back
-  </button>
+<div class="container">
+  <div class="content">
+    <div class="details" *ngIf="details$ && (details$ | async) as details">
+      <app-header [data]="details"></app-header>
+      <app-cover [data]="details"></app-cover>
+      <app-genres [genres]="details.genres"></app-genres>
+      <div class="overview box" *ngIf="details.overview">
+        <span class="title">Overview</span>
+        <span class="text">{{ details.overview }}</span>
+      </div>
+      <button
+        class="back-button"
+        mat-raised-button
+        color="primary"
+        (click)="back()"
+      >
+        Back
+      </button>
+    </div>
+    <div class="credits" *ngIf="credits$ && (credits$ | async) as credits">
+      <span class="text">Cast</span>
+      <app-credits [data]="credits.cast"></app-credits>
+
+      <ng-container *ngIf="credits.crew">
+        <span class="text">Crew</span>
+        <app-credits [data]="credits.crew"></app-credits>
+      </ng-container>
+    </div>
+  </div>
 </div>

@@ -1,0 +1,17 @@
+<div class="container">
+  <ng-container *ngIf="imgUrl; else noImage">
+    <img [src]="imgUrl" class="picture" />
+  </ng-container>
+  <div class="info">
+    <span class="title">{{ data?.name }}</span>
+    <span class="text" *ngIf="data?.character">as {{ data?.character }}</span>
+    <span class="text" *ngIf="data?.known_for_department && !data?.character">
+      {{ data?.known_for_department }}
+    </span>
+    <span class="text" *ngIf="data?.job">Job: {{ data?.job }}</span>
+  </div>
+</div>
+
+<ng-template #noImage>
+  <img class="poster" src="assets/png/no-image.png" />
+</ng-template>
