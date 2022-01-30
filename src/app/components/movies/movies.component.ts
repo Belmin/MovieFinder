@@ -16,7 +16,7 @@ export class MoviesComponent extends BaseComponent {
   movies$: Observable<Movie[]>;
 
   constructor(
-    public searchBoxService: SearchBoxService,
+    private searchBoxService: SearchBoxService,
     private router: Router
   ) {
     super();

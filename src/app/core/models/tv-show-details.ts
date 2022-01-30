@@ -10,7 +10,7 @@ import { SpokenLanguage } from './spoken-language';
 import { Videos } from './video';
 
 export interface TvShowDetails extends BaseDetails {
-  backdrop_path?: string;
+  backdrop_path: string | null;
   created_by: CreatedBy[];
   episode_run_time: number[];
   first_air_date: string;
@@ -21,6 +21,7 @@ export interface TvShowDetails extends BaseDetails {
   last_air_date: string;
   last_episode_to_air: LastEpisodeToAir;
   name: string;
+  next_episode_to_air: any;
   networks: Network[];
   number_of_episodes: number;
   number_of_seasons: number;

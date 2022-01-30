@@ -125,3 +125,13 @@ app-credits {
     }
   }
 }
+
+@media screen and (max-width: 425px) {
+  app-cover {
+    min-height: 250px;
+  }
+
+  .back-button {
+    max-width: unset;
+  }
+}

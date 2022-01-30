@@ -1,6 +1,6 @@
 export interface TmdbApiGetResponse<T> {
   page: number;
   results: T[];
-  totalPages: number;
-  totalResults: number;
+  total_pages: number;
+  total_results: number;
 }

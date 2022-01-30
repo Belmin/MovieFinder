@@ -7,7 +7,7 @@ import { Video, Videos } from './video';
 
 export interface MovieDetails extends BaseDetails {
   adult: boolean;
-  backdrop_path?: string;
+  backdrop_path: string | null;
   belongs_to_collection?: any;
   budget: number;
   genres: Genre[];

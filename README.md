@@ -1,13 +1,12 @@
 # MovieFinder
-MovieFinder is a simple web app that provides user friendly functionalities for finding top rated Movies or TV Shows that are extracted from TheMovieDB API https://developers.themoviedb.org/3.
 
-## Development server
+MovieFinder is a responsive web app that provides user friendly functionalities for searching wanted Movies or TV Shows that are extracted from [TheMovieDB API](https://developers.themoviedb.org/3).
+Also, it allows the user to view the details for selected Movie or TV Show.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
-
-## Code scaffolding
-
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Starting development server locally
+To start the app locally firstly run `npm install` in order to install required packages. 
+After the packages are installed, run `npm run start` for starting the dev server. 
+Then, navigate to `http://localhost:4200/`.
 
 ## Build
 
@@ -16,7 +15,3 @@ Run `ng build` to build the project. The build artifacts will be stored in the `
 ## Running unit tests
 
 Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
-
-## Running end-to-end tests
-
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.

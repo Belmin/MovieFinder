@@ -6,8 +6,8 @@ export interface Cast {
   name: string;
   original_name: string;
   popularity: number;
-  profile_path: string;
-  cast_id: number;
+  profile_path: string | null;
+  cast_id?: number;
   character: string;
   credit_id: string;
   order: number;
